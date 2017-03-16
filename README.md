@@ -1,19 +1,19 @@
 # spring-project
 A traval social network built with Spring framework
 
-#Cahier des charges
+# Cahier des charges
 
-##Motivation
+## Motivation
 
 Dans le cadre des cours Qualité logiciel et Java Entreprise Edition, un projet web est réalisé. Ce dernier sera testé dans le cadre du cours Qualité logiciel.
 
-##But final
+## But final
 
 Le but est de créer un réseau social orienté sur les voyages et les photos prises au cours de ceux-ci.
 
-##Objectifs
+## Objectifs
 
-###Primaires
+### Primaires
 
 * Créer un profil
 * Créer des voyages
@@ -21,17 +21,17 @@ Le but est de créer un réseau social orienté sur les voyages et les photos pr
 * Pouvoir suivre d'autres utilisateurs
 * Avoir une page de feed (visualisation des voyages des abonnements)
 
-###Secondaires
+### Secondaires
 
 * Ajouter plus d'éléments dans les voyages, par exemple des itinéraires, des plats, des activités, des vidéos
 * Responsive Design
 * Pouvoir laisser des commentaires
 * Pouvoir laisser des notes
 
-##Ressources nécessaires
+## Ressources nécessaires
 
 Spring MVC et Materialize CSS seront utilisés, ainsi qu’un dépôt GitHub.
 
-##Délai
+## Délai
 
 Le projet commence le 9 décembre 2016 et se terminera en fin avril 2017.
