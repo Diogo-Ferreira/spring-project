@@ -20,6 +20,10 @@ jar {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
 }
+jar {
+    baseName = 'gs-accessing-data-jpa'
+    version =  '0.1.0'
+}
 
 repositories {
     mavenCentral()
@@ -38,5 +42,8 @@ dependencies {
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
+    compile("mysql:mysql-connector-java:5.1.16")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
     testCompile("junit:junit")
 }
