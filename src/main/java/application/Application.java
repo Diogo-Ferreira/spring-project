@@ -1,4 +1,4 @@
-package hello;
+package application;
 
 import java.util.Arrays;
 
@@ -9,19 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import repositories.TripRepository;
-import services.TripService;
-import services.TripServiceImplementation;
 
-@EnableAutoConfiguration
-@EnableWebMvc
+@SpringBootApplication
 public class Application {
 
-    /*
-    @Bean
-    public TripService getTripService(){
-        return new TripServiceImplementation();
-    }*/
 
 
 

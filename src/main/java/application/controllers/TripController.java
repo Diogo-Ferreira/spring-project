@@ -1,13 +1,13 @@
-package hello;
+package application.controllers;
 
-import entities.TripEntity;
+import application.entities.TripEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import services.TripService;
+import application.services.TripService;
 
 /**
  * Created by diogo on 3/17/17.
@@ -53,6 +53,11 @@ public class TripController {
     public String edit(@PathVariable Integer id, Model model) {
         model.addAttribute("trip", tripService.getTripById(id));
         return "tripform";
+    }
+
+    @RequestMapping(value = "/application/controllers", method = RequestMethod.GET)
+    public String test(){
+        return "application/controllers";
     }
 
     /**

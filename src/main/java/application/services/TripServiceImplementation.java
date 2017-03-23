@@ -1,10 +1,10 @@
-package services;
+package application.services;
 
-import entities.TripEntity;
+import application.entities.TripEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
-import repositories.TripRepository;
+import application.repositories.TripRepository;
 
 /**
  * Created by diogo on 3/17/17.

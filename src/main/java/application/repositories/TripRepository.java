@@ -1,7 +1,6 @@
-package repositories;
+package application.repositories;
 
-import entities.TripEntity;
-import org.springframework.context.annotation.Bean;
+import application.entities.TripEntity;
 import org.springframework.data.repository.CrudRepository;
 
 /**

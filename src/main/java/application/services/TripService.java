@@ -1,6 +1,6 @@
-package services;
+package application.services;
 
-import entities.TripEntity;
+import application.entities.TripEntity;
 
 /**
  * Created by diogo on 3/17/17.
