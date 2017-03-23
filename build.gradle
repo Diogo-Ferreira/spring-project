@@ -44,6 +44,11 @@ dependencies {
     // end::actuator[]
     compile("mysql:mysql-connector-java:5.1.16")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("com.h2database:h2")
     testCompile("junit:junit")
+}
+
+bootRun {
+    addResources = true
 }
