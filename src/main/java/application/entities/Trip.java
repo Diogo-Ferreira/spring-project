@@ -8,8 +8,7 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name="Trip")
-public class TripEntity {
+public class Trip {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -21,9 +20,14 @@ public class TripEntity {
     private Date startDate;
     private Date endDate;
 
-    public TripEntity() {}
+    public Trip(String name, String location) {
+        this.name = name;
+        this.location = location;
+    }
 
-    public TripEntity(String name, String location, Date startDate, Date endDate) {
+    public Trip() {}
+
+    public Trip(String name, String location, Date startDate, Date endDate) {
         this.name = name;
         this.location = location;
         this.startDate = startDate;
@@ -32,7 +36,7 @@ public class TripEntity {
 
     @Override
     public String toString() {
-        return "TripEntity{" +
+        return "Trip{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +

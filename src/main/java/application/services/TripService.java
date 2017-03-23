@@ -1,18 +1,30 @@
 package application.services;
 
-import application.entities.TripEntity;
+import application.entities.Trip;
+import application.repositories.TripRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by diogo on 3/17/17.
  */
-public interface TripService {
+@Service
+public class TripService {
 
-    Iterable<TripEntity> all();
+    private TripRepository tripRepository;
 
-    TripEntity getTripById(Integer id);
+    @Autowired
+    public void setTripRepository(TripRepository tripRepository) {
+        this.tripRepository = tripRepository;
+    }
 
-    TripEntity saveTrip(TripEntity tripEntity);
+    @Autowired
+    public TripRepository getTripRepository() {
+        return tripRepository;
+    }
 
-    void deleteProduct(Integer id);
 
+    public Iterable<Trip> getAll(){
+        return tripRepository.findAll();
+    }
 }
