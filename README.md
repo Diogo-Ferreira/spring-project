@@ -1,5 +1,5 @@
 # spring-project
-A traval social network built with Spring framework
+A travel social network built with Spring framework
 
 # Cahier des charges
 
