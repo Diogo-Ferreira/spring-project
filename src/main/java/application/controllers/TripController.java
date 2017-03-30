@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by diogo on 3/17/17.
  */
-@RestController
+@Controller
 public class TripController {
 
     @RequestMapping("/trips")
