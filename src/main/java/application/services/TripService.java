@@ -29,4 +29,6 @@ public class TripService {
     }
 
     public Trip saveTrip(Trip trip){return  tripRepository.save(trip);}
+
+    public Trip getTripById(Integer id){return tripRepository.findOne(Long.valueOf(id));}
 }
