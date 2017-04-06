@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Trip</title>
+</head>
+<body>
+    <h1>New trip</h1>
+    <form th:object="${trip}" th:action="@{/trip}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <p>Trip name :</p>
+        <input type="text" th:field="*{name}"/>
+        <p>Trip location :</p>
+        <input type="text" th:field="*{location}"/>
+
+
+        <button type="submit">Submit</button>
+
+    </form>
+</body>
+</html>

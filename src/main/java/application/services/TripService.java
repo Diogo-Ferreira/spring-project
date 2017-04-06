@@ -27,4 +27,8 @@ public class TripService {
     public Iterable<Trip> getAll(){
         return tripRepository.findAll();
     }
+
+    public Trip saveTrip(Trip trip){return  tripRepository.save(trip);}
+
+    public Trip getTripById(Integer id){return tripRepository.findOne(Long.valueOf(id));}
 }
