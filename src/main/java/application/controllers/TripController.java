@@ -25,7 +25,7 @@ public class TripController {
         return trips;
     }
 
-    @RequestMapping("/trip/{id}")
+    @RequestMapping("trip/{id}")
     public String showTrip(@PathVariable Integer id, Model model){
         model.addAttribute("trip", tripService.getTripById(id));
         return "tripshow";
