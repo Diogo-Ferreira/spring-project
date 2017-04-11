@@ -12,6 +12,6 @@ public class Privilege {
 
     private String name;
 
-    @ManyToMany(mappedBy = "privileges")
+    @ManyToMany
     private Collection<Role> roles;
 }

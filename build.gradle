@@ -43,12 +43,12 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     compile("mysql:mysql-connector-java:5.1.16")
+
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("com.h2database:h2")
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
-    compile group: 'org.hibernate', name: 'hibernate-core', version: '4.3.5.Final'
-    compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.1.7.Final'
+
     testCompile("org.springframework.security:spring-security-test")
     compile("org.springframework.boot:spring-boot-starter-security")
     testCompile("junit:junit")
