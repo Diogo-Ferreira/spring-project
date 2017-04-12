@@ -50,6 +50,13 @@ public class TripController {
         return "redirect:/trips";
     }
 
+    /*Edit a trip*/
+    @RequestMapping("/trip/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        model.addAttribute("trip", tripService.getTripById(id));
+        return "tripform";
+    }
+
     @Autowired
     public void setTripService(TripService tripService){
         this.tripService = tripService;
