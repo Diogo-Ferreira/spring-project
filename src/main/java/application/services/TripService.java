@@ -23,12 +23,15 @@ public class TripService {
         return tripRepository;
     }
 
-
-    public Iterable<Trip> getAll(){
-        return tripRepository.findAll();
-    }
-
     public Trip saveTrip(Trip trip){return  tripRepository.save(trip);}
 
     public Trip getTripById(Integer id){return tripRepository.findOne(Long.valueOf(id));}
+
+    public Iterable<Trip> listAllTrips(){
+        return tripRepository.findAll();
+    }
+
+    public void deleteTrip(Integer id){
+        tripRepository.delete(Long.valueOf(id));
+    }
 }

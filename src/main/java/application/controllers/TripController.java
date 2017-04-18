@@ -19,13 +19,13 @@ import java.util.List;
 public class TripController {
 
     @RequestMapping("/trips")
-    public List<Trip> trips()
+    public String list(Model model)
     {
-        List<Trip> trips = (List<Trip>) tripService.getAll();
-        return trips;
+        model.addAttribute("trips", tripService.listAllTrips());
+        return "trips";
     }
 
-    @RequestMapping("trip/{id}")
+    @RequestMapping("/trip/{id}")
     public String showTrip(@PathVariable Integer id, Model model){
         model.addAttribute("trip", tripService.getTripById(id));
         return "tripshow";
@@ -41,6 +41,20 @@ public class TripController {
     public  String saveTrip(Trip trip){
         tripService.saveTrip(trip);
         return  "redirect:/trip/"+trip.getId();
+    }
+
+    /*Delete trip*/
+    @RequestMapping("/trip/delete/{id}")
+    public String delete(@PathVariable Integer id){
+        tripService.deleteTrip(id);
+        return "redirect:/trips";
+    }
+
+    /*Edit a trip*/
+    @RequestMapping("/trip/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        model.addAttribute("trip", tripService.getTripById(id));
+        return "tripform";
     }
 
     @Autowired
