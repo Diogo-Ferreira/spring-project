@@ -1,15 +1,11 @@
 package application.services;
 
-import application.entities.Role;
 import application.entities.User;
 import application.repositories.RoleRepository;
 import application.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Collection;
-import java.util.HashSet;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -30,5 +26,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User findById(long id) {
+        return userRepository.findOne(id);
     }
 }

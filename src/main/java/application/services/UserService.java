@@ -3,6 +3,8 @@ package application.services;
 import application.entities.User;
 
 public interface UserService {
-    public void save(User user);
-    public User findByUsername(String username);
+    void save(User user);
+    User findByUsername(String username);
+
+    User findById(long id);
 }
