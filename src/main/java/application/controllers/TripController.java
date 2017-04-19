@@ -18,7 +18,15 @@ import java.util.List;
 @Controller
 public class TripController {
 
-    @RequestMapping("/trips")
+    private TripService tripService;
+
+    @Autowired
+    public void setTripService(TripService tripService){
+        this.tripService = tripService;
+    }
+
+
+    @RequestMapping(value="/trips", method = RequestMethod.GET)
     public String list(Model model)
     {
         model.addAttribute("trips", tripService.listAllTrips());
@@ -56,10 +64,4 @@ public class TripController {
         model.addAttribute("trip", tripService.getTripById(id));
         return "tripform";
     }
-
-    @Autowired
-    public void setTripService(TripService tripService){
-        this.tripService = tripService;
-    }
-    private TripService tripService;
 }

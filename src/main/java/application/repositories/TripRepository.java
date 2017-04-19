@@ -9,6 +9,5 @@ import java.util.List;
  * Created by diogo on 3/10/17.
  */
 public interface TripRepository extends CrudRepository<Trip, Long> {
-    List<Trip> findByName(String name);
 
 }

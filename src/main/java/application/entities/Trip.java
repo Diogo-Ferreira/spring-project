@@ -20,19 +20,19 @@ public class Trip {
     private Date startDate;
     private Date endDate;
 
-    public Trip(String name, String location) {
+    /*public Trip(String name, String location) {
         this.name = name;
         this.location = location;
-    }
+    }*/
 
-    public Trip() {}
+    //public Trip() {}
 
-    public Trip(String name, String location, Date startDate, Date endDate) {
+   /* public Trip(String name, String location, Date startDate, Date endDate) {
         this.name = name;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
+    }*/
 
     @Override
     public String toString() {
