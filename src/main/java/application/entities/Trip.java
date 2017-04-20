@@ -2,16 +2,17 @@ package application.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by diogo on 3/10/17.
  */
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Trip {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+
     private Long id;
 
     private String name;
@@ -19,6 +20,20 @@ public class Trip {
 
     private Date startDate;
     private Date endDate;
+
+
+    private Set<User> users;
+
+
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(name = "user_trip", joinColumns = @JoinColumn(name = "trip_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 
     public Trip(String name, String location) {
         this.name = name;
@@ -45,6 +60,8 @@ public class Trip {
                 '}';
     }
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -84,4 +101,5 @@ public class Trip {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
 }

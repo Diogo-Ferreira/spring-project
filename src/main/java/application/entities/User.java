@@ -14,6 +14,15 @@ public class User {
     private String passwordConfirm;
     private Set<Role> roles;
     private Set<Trip> trips;
+    private String bio;
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     /**
      * Which user does this user follow

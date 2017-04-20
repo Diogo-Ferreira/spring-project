@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.Set;
 
 /**
@@ -29,8 +30,9 @@ public class ProfileController {
     private SecurityService securityService;
 
     @RequestMapping("profile/show/{id}")
-    public String show(@PathVariable long id, Model model){
+    public String show(@PathVariable long id, Model model,Authentication authentication){
         User user = userService.findById(id);
+        UserDetails authUser = (UserDetails) authentication.getPrincipal();
         Set<Trip> tripsOfUser = user.getTrips();
         Set<User> followingUsers = user.getFollowing();
         Set<User> followedByUsers = user.getFollowedBy();
@@ -38,7 +40,15 @@ public class ProfileController {
         model.addAttribute("trips", tripsOfUser);
         model.addAttribute("following",followingUsers);
         model.addAttribute("followedBy",followedByUsers);
+        model.addAttribute("isAuthUser",authUser.getUsername().equals(user.getUsername()));
         return "profile";
+    }
+
+    @RequestMapping("/profile/show/me")
+    public String showMe(Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User authenticatedUser = userService.findByUsername(userDetails.getUsername());
+        return "redirect:/profile/show/"+ authenticatedUser.getId();
     }
 
     @RequestMapping(value = "profile/follow/{id}",method = RequestMethod.POST)
@@ -49,7 +59,6 @@ public class ProfileController {
         User authenticatedUser = userService.findByUsername(userDetails.getUsername());
         authenticatedUser.getFollowing().add(userToFollow);
         userService.save(authenticatedUser);
-
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
     }

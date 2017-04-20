@@ -1,37 +1,70 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html
+      xmlns:th="http://www.thymeleaf.org"
+      th:include="base :: page">
 <head>
     <title>Profile</title>
 </head>
 <body>
+    <div th:fragment="content">
 
-    <div>
-        <h1 th:text='${"Profile of " + user.username }'></h1>
+        <br />
+        <div class="card">
+            <div class="card-block">
+                <h4 class="card-title" th:text='${user.username }'></h4>
 
-        <form th:action="@{/profile/follow/{id}(id=${user.id})}" method="POST">
-            <input type="submit" value="Follow this user !"/>
-        </form>
+                <p th:text="${user.bio}"></p>
 
-        <div th:each="trip : ${trips}">
-            <p th:text="${trip.name}"></p>
+                <form th:if="${!isAuthUser}" th:action="@{/profile/follow/{id}(id=${user.id})}" method="POST">
+                    <input class="btn btn-primary" type="submit" value="Follow this user !"/>
+                </form>
+            </div>
+        </div>
+
+        <br />
+        <h1>Trips</h1>
+        <div class="card-columns">
+            <div class="card" th:each="trip : ${trips}">
+                <img class="card-img-top" src="..." alt="Card image cap" />
+                <div class="card-block">
+                    <h4 class="card-title" th:text="${trip.name}">Card title</h4>
+                    <p class="card-text">Description</p>
+                    <a href="#">See this trip</a>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <h1>Follows</h1>
+
+        <div class="cards-columns">
+            <div class="card" th:each="user : ${following}" style="width: 20rem;">
+                <img class="card-img-top" src="..." alt="Card image cap" />
+                <div class="card-block">
+                    <h4 class="card-title" th:text="${user.username}">Card title</h4>
+                    <p class="card-text">Quick bio...</p>
+                    <a href="#" class="btn btn-primary">See this user</a>
+                </div>
+            </div>
+        </div>
+
+        <h1>Followed by</h1>
+
+        <div class="cards-columns">
+            <div class="card" th:each="user : ${followedBy}" style="width: 20rem;">
+                <img class="card-img-top" src="..." alt="Card image cap" />
+                <div class="card-block">
+                    <h4 class="card-title" th:text="${user.username}">Card title</h4>
+                    <p class="card-text">Quick bio...</p>
+                    <a href="#" class="btn btn-primary">See this user</a>
+                </div>
+            </div>
         </div>
     </div>
-
-
-    <div>
-        <h1 th:text='${ user.username + "Follows "}'></h1>
-
-        <div th:each="user : ${following}">
-            <p th:text="${user.username}"></p>
-        </div>
-
-        <h1 th:text='${"Users who follow " + user.username}'></h1>
-
-        <div th:each="user : ${followedBy}">
-            <p th:text="${user.username}"></p>
-        </div>
-    </div>
-
 
 </body>
 </html>

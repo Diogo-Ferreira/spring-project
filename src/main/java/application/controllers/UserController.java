@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.entities.Trip;
 import application.entities.User;
 import application.services.SecurityService;
 import application.services.UserService;
@@ -58,6 +59,14 @@ public class UserController {
 
     @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
     public String welcome(Model model) {
+        return "welcome";
+    }
+
+    @RequestMapping("/add_trip")
+    public String addTrip(){
+        User user = userService.findByUsername("diogo-ferreira-venancio");
+        user.getTrips().add(new Trip("Trip to japan","Japan"));
+        userService.save(user);
         return "welcome";
     }
 }
