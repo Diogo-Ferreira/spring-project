@@ -61,12 +61,4 @@ public class UserController {
     public String welcome(Model model) {
         return "welcome";
     }
-
-    @RequestMapping("/add_trip")
-    public String addTrip(){
-        User user = userService.findByUsername("diogo-ferreira-venancio");
-        user.getTrips().add(new Trip("Trip to japan","Japan"));
-        userService.save(user);
-        return "welcome";
-    }
 }

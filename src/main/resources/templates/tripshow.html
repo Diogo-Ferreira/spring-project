@@ -1,18 +1,33 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:include="base :: page">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Trip</title>
+    <title th:title="${trip.name}"></title>
 </head>
 <body>
-    <h2>Trip Details</h2>
-    <form>
-        <p>Trip Id :</p>
-        <p th:text="${trip.name}">Trip Id </p>
-        <p>Trip location</p>
-        <p th:text="${trip.location}">Trip location</p>
+<div th:fragment="content">
 
-    </form>
+    <br />
+    <div class="card">
+        <div class="card-block">
+            <h4 class="card-title" th:text='${trip.name}'></h4>
+            <p th:text="${trip.location}"></p>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="card-columns">
+        <div class="card card-inverse" th:each="image : ${trip.images}" >
+            <img class="card-img img-fluid"  th:src="${image.url}" alt="Card image" />
+            <div class="card-img-overlay">
+                <h4 class="card-title" th:text="${image.title}">Card title</h4>
+                <p class="card-text" th:text="${image.body}"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

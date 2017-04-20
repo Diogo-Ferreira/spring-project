@@ -21,7 +21,17 @@ public class Trip {
     private Date startDate;
     private Date endDate;
     private Set<User> users;
+    private Set<TripImage> images;
 
+
+    @OneToMany
+    public Set<TripImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<TripImage> images) {
+        this.images = images;
+    }
 
     @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "user_trip", joinColumns = @JoinColumn(name = "trip_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -31,21 +41,6 @@ public class Trip {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
-
-    /*public Trip(String name, String location) {
->>>>>>> 27ea0e80bb52a2af660a168fca2938a8408e12f2
-        this.name = name;
-        this.location = location;
-    }*/
-
-    //public Trip() {}
-
-   /* public Trip(String name, String location, Date startDate, Date endDate) {
-        this.name = name;
-        this.location = location;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }*/
 
     @Override
     public String toString() {
