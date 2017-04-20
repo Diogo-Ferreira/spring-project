@@ -20,8 +20,6 @@ public class Trip {
 
     private Date startDate;
     private Date endDate;
-
-
     private Set<User> users;
 
 
@@ -30,24 +28,24 @@ public class Trip {
     public Set<User> getUsers() {
         return users;
     }
-
     public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public Trip(String name, String location) {
+    /*public Trip(String name, String location) {
+>>>>>>> 27ea0e80bb52a2af660a168fca2938a8408e12f2
         this.name = name;
         this.location = location;
-    }
+    }*/
 
-    public Trip() {}
+    //public Trip() {}
 
-    public Trip(String name, String location, Date startDate, Date endDate) {
+   /* public Trip(String name, String location, Date startDate, Date endDate) {
         this.name = name;
         this.location = location;
         this.startDate = startDate;
         this.endDate = endDate;
-    }
+    }*/
 
     @Override
     public String toString() {
