@@ -12,12 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TripService {
 
-    private TripRepository tripRepository;
-
     @Autowired
-    public void setTripRepository(TripRepository tripRepository) {
-        this.tripRepository = tripRepository;
-    }
+    private TripRepository tripRepository;
 
     @Autowired
     public TripRepository getTripRepository() {

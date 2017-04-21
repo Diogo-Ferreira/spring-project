@@ -50,7 +50,7 @@
                 <div class="card-block">
                     <h4 class="card-title" th:text="${user.username}">Card title</h4>
                     <p class="card-text">Quick bio...</p>
-                    <a href="#" class="btn btn-primary">See this user</a>
+                    <a th:href="@{/profile/show/{id}(id=${user.id})}" class="card-link">See this user</a>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
                 <div class="card-block">
                     <h4 class="card-title" th:text="${user.username}">Card title</h4>
                     <p class="card-text">Quick bio...</p>
-                    <a href="#" class="btn btn-primary">See this user</a>
+                    <a th:href="@{/profile/show/{id}(id=${user.id})}" class="card-link">See this user</a>
                 </div>
             </div>
         </div>

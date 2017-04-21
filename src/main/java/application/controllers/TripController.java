@@ -2,6 +2,7 @@ package application.controllers;
 
 import application.entities.Trip;
 import application.entities.User;
+import application.services.TripImageService;
 import application.services.UserService;
 import application.validator.TripValidator;
 import application.entities.TripImage;
@@ -31,6 +32,9 @@ public class TripController {
     private TripValidator tripValidator;
 
     @Autowired
+    private TripImageService tripImageService;
+
+    @Autowired
     public void setTripService(TripService tripService){
         this.tripService = tripService;
     }
@@ -45,7 +49,6 @@ public class TripController {
 
     @RequestMapping("/trip/{id}")
     public String showTrip(@PathVariable Integer id, Model model){
-
         model.addAttribute("trip", tripService.getTripById(id));
         return "tripshow";
     }
@@ -89,11 +92,17 @@ public class TripController {
         return "redirect:/profile/show/me";
     }
 
-    /*Delete trip*/
+    /*Delete trip image*/
     @RequestMapping(value = "/trip/image/delete/{id}", method = RequestMethod.POST)
     public String deleteImage(@PathVariable Integer id){
-        //tripService.deleteTrip(id);
-        return "redirect:/trips";
+        // TODO: simplify this
+        TripImage tripImage = tripImageService.getTripImageById(id);
+        Trip trip = tripImage.getTrip();
+        trip.getImages().remove(tripImage);
+        tripService.saveTrip(trip);
+        tripImage.setTrip(null);
+        tripImageService.deleteTripImage(id);
+        return "redirect:/trip/"+trip.getId();
     }
 
 

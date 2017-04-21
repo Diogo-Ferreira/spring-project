@@ -34,7 +34,7 @@ public class TripImage {
         this.url = url;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="trip_id")
     public Trip getTrip() {
         return trip;

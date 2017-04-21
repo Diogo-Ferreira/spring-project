@@ -49,7 +49,7 @@ public class Trip {
         this.images = images;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "traveler_id")
     public User getTraveler() {
         return traveler;

@@ -28,7 +28,9 @@
                 <p class="card-text" th:text="${image.body}"></p>
             </div>
             <div class="card-footer">
-                <a href="#" class="btn btn-danger">Delete</a>
+                <form th:action="@{/trip/image/delete/{id}(id=${image.id})}" method="POST">
+                    <input style="position: relative;z-index: 99;" type="submit" value="Delete" class="btn btn-danger"/>
+                </form>
             </div>
         </div>
     </div>
