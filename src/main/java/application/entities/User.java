@@ -69,7 +69,7 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "traveler")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "traveler", orphanRemoval = true)
     public Set<Trip> getTrips(){ return trips;}
 
     @ManyToMany(cascade=CascadeType.REMOVE)

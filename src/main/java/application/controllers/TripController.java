@@ -23,6 +23,7 @@ import java.util.*;
 @Controller
 public class TripController {
 
+
     private TripService tripService;
 
     @Autowired
@@ -88,20 +89,21 @@ public class TripController {
     @RequestMapping(value = "/trip/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable Integer id){
         Trip trip = tripService.getTripById(id);
-        tripService.deleteTrip(trip);
+        trip.getImages().clear();
+        tripService.saveTrip(trip);
+        User user = trip.getTraveler();
+        user.getTrips().remove(trip);
+        userService.save(user);
         return "redirect:/profile/show/me";
     }
 
     /*Delete trip image*/
     @RequestMapping(value = "/trip/image/delete/{id}", method = RequestMethod.POST)
     public String deleteImage(@PathVariable Integer id){
-        // TODO: simplify this
         TripImage tripImage = tripImageService.getTripImageById(id);
         Trip trip = tripImage.getTrip();
         trip.getImages().remove(tripImage);
         tripService.saveTrip(trip);
-        tripImage.setTrip(null);
-        tripImageService.deleteTripImage(id);
         return "redirect:/trip/"+trip.getId();
     }
 

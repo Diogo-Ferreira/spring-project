@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        th:include="base :: page">
+<head>
+    <title>Wall</title>
+</head>
+<body>
+<div th:fragment="content">
+
+    <br />
+    <div th:each="user : ${users}" th:if="${not #lists.isEmpty(user.value)}">
+        <h1 th:text="${user.key.username}"></h1>
+
+        <br />
+        <div class="card-deck">
+            <div class="card card-inverse" th:each="image : ${user.value}">
+                <img class="card-img img-fluid"  th:src="${image.url}" alt="Card image" />
+                <div class="card-img-overlay">
+                    <h4 class="card-title" th:text="${image.title}">Card title</h4>
+                    <p class="card-text" th:text="${image.body}"></p>
+                </div>
+            </div>
+        </div>
+
+        <br />
+    </div>
+</div>
+
+</body>
+</html>

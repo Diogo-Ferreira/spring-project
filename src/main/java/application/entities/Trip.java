@@ -40,7 +40,7 @@ public class Trip {
         return (TripImage) images.toArray()[0];
     }
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<TripImage> getImages() {
         return images;
     }
@@ -49,7 +49,7 @@ public class Trip {
         this.images = images;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "traveler_id")
     public User getTraveler() {
         return traveler;
