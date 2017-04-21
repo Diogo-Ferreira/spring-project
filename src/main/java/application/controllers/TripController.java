@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.entities.Trip;
+import application.entities.TripImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,7 @@ public class TripController {
         model.addAttribute("trip", new Trip());
         return "tripform";
     }
+
     /*Save trip*/
     @RequestMapping(value="trip", method=RequestMethod.POST)
     public  String saveTrip(Trip trip){
@@ -63,5 +65,23 @@ public class TripController {
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("trip", tripService.getTripById(id));
         return "tripform";
+    }
+
+    /*ADD Image*/
+    @RequestMapping(value="trip/{trip_id}/image")
+    public  String addImage(@PathVariable Integer trip_id,TripImage image){
+
+        Trip trip = tripService.getTripById(trip_id);
+        image.setUrl("www.smashingmagazine.com/wp-content/uploads/2015/06/10-dithering-opt.jpg");
+        trip.getImages().add(image);
+
+        //tripImageService.saveTripImage(image);
+        return  "redirect:/trip/"+trip.getId();
+    }
+
+    @RequestMapping(value="/trip/{trip_id}/new/image")
+    public String newTripImage(@PathVariable Integer trip_id, Model model){
+        model.addAttribute("tripImage", new TripImage());
+        return "addimageform";
     }
 }
