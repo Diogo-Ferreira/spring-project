@@ -1,6 +1,7 @@
 package application.services;
 
 import application.entities.Trip;
+import application.entities.TripImage;
 import application.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
