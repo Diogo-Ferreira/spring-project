@@ -36,6 +36,8 @@ public class UserController {
         userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("hasErrors",true);
+            model.addAttribute("errors",bindingResult.getAllErrors());
             return "registration";
         }
 
@@ -43,22 +45,17 @@ public class UserController {
 
         securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 
-        return "redirect:/welcome";
+        return "redirect:/profile/show/me";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model, String error, String logout) {
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
+            model.addAttribute("error", error);
 
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
-    }
-
-    @RequestMapping(value = {"/", "/welcome"}, method = RequestMethod.GET)
-    public String welcome(Model model) {
-        return "welcome";
     }
 }

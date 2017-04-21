@@ -13,6 +13,8 @@
         <div class="card-block">
             <h4 class="card-title" th:text='${trip.name}'></h4>
             <p th:text="${trip.location}"></p>
+            <p th:text="${trip.traveler.username}"></p>
+            <p th:text='${trip.startDate + " To " + trip.endDate}'></p>
         </div>
     </div>
 
@@ -25,8 +27,22 @@
                 <h4 class="card-title" th:text="${image.title}">Card title</h4>
                 <p class="card-text" th:text="${image.body}"></p>
             </div>
+            <div class="card-footer">
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
         </div>
     </div>
+
+
+    <br />
+
+    <a th:href="@{/trip/edit/{id}(id=${trip.id})}" class="btn btn-info">Alter this trip</a>
+
+    <br />
+
+    <form method="POST" th:action="@{/trip/delete/{id}(id=${trip.id})}">
+        <input type="submit" value="Delete this trip" class="btn btn-danger" />
+    </form>
 </div>
 
 </body>

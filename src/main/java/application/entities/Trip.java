@@ -1,6 +1,12 @@
 package application.entities;
 
+import application.entities.converters.DateConverter;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,11 +26,21 @@ public class Trip {
 
     private Date startDate;
     private Date endDate;
-    private Set<User> users;
+    private User traveler;
     private Set<TripImage> images;
 
+    @Transient
+    public TripImage getCover(){
 
-    @OneToMany
+        if(images.isEmpty()) {
+            TripImage tripImage = new TripImage();
+            tripImage.setUrl("http://www.yzgeneration.com/wp-content/themes/Gonzo-2/images/no-image-featured-image.png");
+            return tripImage;
+        }
+        return (TripImage) images.toArray()[0];
+    }
+
+    @OneToMany(fetch = FetchType.EAGER)
     public Set<TripImage> getImages() {
         return images;
     }
@@ -33,13 +49,14 @@ public class Trip {
         this.images = images;
     }
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "user_trip", joinColumns = @JoinColumn(name = "trip_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    public Set<User> getUsers() {
-        return users;
+    @ManyToOne
+    @JoinColumn(name = "traveler_id")
+    public User getTraveler() {
+        return traveler;
     }
-    public void setUsers(Set<User> users) {
-        this.users = users;
+
+    public void setTraveler(User traveler) {
+        this.traveler = traveler;
     }
 
     @Override
@@ -79,20 +96,26 @@ public class Trip {
         this.location = location;
     }
 
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public Date getStartDate() {
         return startDate;
     }
 
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public Date getEndDate() {
+        return endDate;
     }
 
 }

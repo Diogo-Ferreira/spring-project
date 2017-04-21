@@ -15,8 +15,12 @@
 
                 <p th:text="${user.bio}"></p>
 
-                <form th:if="${!isAuthUser}" th:action="@{/profile/follow/{id}(id=${user.id})}" method="POST">
-                    <input class="btn btn-primary" type="submit" value="Follow this user !"/>
+                <form th:if="${!isAuthUser and !followsAlready}" th:action="@{/profile/follow/{id}(id=${user.id})}" method="POST">
+                    <input class="btn btn-primary" type="submit" value="Follow"/>
+                </form>
+
+                <form th:if="${!isAuthUser and followsAlready}" th:action="@{/profile/unfollow/{id}(id=${user.id})}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Unfollow"/>
                 </form>
             </div>
         </div>
@@ -25,11 +29,11 @@
         <h1>Trips</h1>
         <div class="card-columns">
             <div class="card" th:each="trip : ${trips}">
-                <img class="card-img-top" src="..." alt="Card image cap" />
+                <img class="card-img-top img-fluid" th:src="${trip.cover.url}" alt="Card image cap" />
                 <div class="card-block">
                     <h4 class="card-title" th:text="${trip.name}">Card title</h4>
                     <p class="card-text">Description</p>
-                    <a href="#">See this trip</a>
+                    <a th:href="@{/trip/{id}(id=${trip.id})}">See this trip</a>
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">Last updated 3 mins ago</small>
@@ -43,7 +47,6 @@
 
         <div class="cards-columns">
             <div class="card" th:each="user : ${following}" style="width: 20rem;">
-                <img class="card-img-top" src="..." alt="Card image cap" />
                 <div class="card-block">
                     <h4 class="card-title" th:text="${user.username}">Card title</h4>
                     <p class="card-text">Quick bio...</p>
@@ -56,7 +59,6 @@
 
         <div class="cards-columns">
             <div class="card" th:each="user : ${followedBy}" style="width: 20rem;">
-                <img class="card-img-top" src="..." alt="Card image cap" />
                 <div class="card-block">
                     <h4 class="card-title" th:text="${user.username}">Card title</h4>
                     <p class="card-text">Quick bio...</p>

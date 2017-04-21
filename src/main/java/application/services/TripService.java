@@ -31,7 +31,7 @@ public class TripService {
         return tripRepository.findAll();
     }
 
-    public void deleteTrip(Integer id){
-        tripRepository.delete(Long.valueOf(id));
+    public void deleteTrip(Trip trip){
+        tripRepository.delete(trip);
     }
 }

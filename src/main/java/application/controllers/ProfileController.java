@@ -41,6 +41,7 @@ public class ProfileController {
         model.addAttribute("following",followingUsers);
         model.addAttribute("followedBy",followedByUsers);
         model.addAttribute("isAuthUser",authUser.getUsername().equals(user.getUsername()));
+        model.addAttribute("followsAlready",followedByUsers.contains(userService.findByUsername(authUser.getUsername())));
         return "profile";
     }
 
@@ -58,6 +59,18 @@ public class ProfileController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User authenticatedUser = userService.findByUsername(userDetails.getUsername());
         authenticatedUser.getFollowing().add(userToFollow);
+        userService.save(authenticatedUser);
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
+
+    @RequestMapping(value = "profile/unfollow/{id}",method = RequestMethod.POST)
+    public String unFollow(Authentication authentication, HttpServletRequest request, @PathVariable long id){
+
+        User userToFollow = userService.findById(id);
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User authenticatedUser = userService.findByUsername(userDetails.getUsername());
+        authenticatedUser.getFollowing().remove(userToFollow);
         userService.save(authenticatedUser);
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;

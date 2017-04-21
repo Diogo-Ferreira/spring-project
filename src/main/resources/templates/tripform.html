@@ -1,21 +1,58 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      th:include="base :: page"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Trip</title>
+    <title> Login </title>
 </head>
 <body>
-    <h1>New trip</h1>
-    <form th:object="${trip}" th:action="@{/trip}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-        <p>Trip name :</p>
-        <input type="text" th:field="*{name}"/>
-        <p>Trip location :</p>
-        <input type="text" th:field="*{location}"/>
 
-
-        <button type="submit">Submit</button>
-
-    </form>
+    <div  th:fragment="content">
+        <br />
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    New trip
+                </div>
+                <div class="card-block">
+                    <form th:object="${trip}" th:action="@{/trip}" method="post">
+                        <div th:if="${hasErrors}">
+                            <p th:text="${error}" th:each="error : ${errors}"></p>
+                        </div>
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" th:value="*{name}" th:field="*{name}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Location</label>
+                            <div class="col-sm-10">
+                                <input type="text" th:value="*{location}" th:field="*{location}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Start date</label>
+                            <div class="col-sm-10">
+                                <input type="date" th:value="*{startDate}" th:field="*{startDate}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">End date</label>
+                            <div class="col-sm-10">
+                                <input type="date" th:value="*{endDate}" th:field="*{endDate}" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <input class="btn btn-primary" type="submit" value="Create"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

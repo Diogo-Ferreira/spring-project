@@ -12,7 +12,6 @@ public class User {
     private String username;
     private String password;
     private String passwordConfirm;
-    private Set<Role> roles;
     private Set<Trip> trips;
     private String bio;
 
@@ -70,26 +69,17 @@ public class User {
         this.passwordConfirm = passwordConfirm;
     }
 
-    @ManyToMany
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name = "user_trip", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "trip_id"))
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "traveler")
     public Set<Trip> getTrips(){ return trips;}
 
-
-
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.REMOVE)
     @JoinTable(name = "follow_users", joinColumns = @JoinColumn(name = "followed_id"), inverseJoinColumns = @JoinColumn(name = "follower_id"))
     public Set<User> getFollowing() {
         return following;
     }
 
 
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.REMOVE)
     @JoinTable(name = "follow_users", joinColumns = @JoinColumn(name = "follower_id"), inverseJoinColumns = @JoinColumn(name = "followed_id"))
     public Set<User> getFollowedBy() {
         return followedBy;
@@ -105,9 +95,5 @@ public class User {
 
     public void setTrips(Set<Trip> trips) {
         this.trips = trips;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }
