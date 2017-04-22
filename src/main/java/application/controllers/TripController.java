@@ -49,8 +49,12 @@ public class TripController {
     }
 
     @RequestMapping("/trip/{id}")
-    public String showTrip(@PathVariable Integer id, Model model){
-        model.addAttribute("trip", tripService.getTripById(id));
+    public String showTrip(Authentication authentication, @PathVariable Integer id, Model model){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User authenticatedUser = userService.findByUsername(userDetails.getUsername());
+        Trip trip = tripService.getTripById(id);
+        model.addAttribute("trip", trip);
+        model.addAttribute("isTraveler",trip.getTraveler().equals(authenticatedUser));
         return "tripshow";
     }
 

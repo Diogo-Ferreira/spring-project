@@ -75,4 +75,5 @@ public class ProfileController {
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
     }
+
 }

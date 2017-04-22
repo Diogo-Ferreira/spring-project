@@ -49,14 +49,17 @@ public class WallController {
 
         HashMap<User,List<TripImage>> tripImagesByUsers = new HashMap<>();
 
-        // TODO: only 3 trip images by users
+
+        //Note: This code ain't efficient at all and should be replaced by a specific SQL query in the future
         for(User userFollowing : usersFollowing){
             tripImagesByUsers.put(userFollowing, new ArrayList<>());
             for(Trip trip : userFollowing.getTrips()){
-                tripImagesByUsers.get(userFollowing).addAll(trip.getImages());
+                ArrayList<TripImage> tripImagesList = new ArrayList<>();
+                tripImagesList.addAll(trip.getImages());
+                int index = tripImagesList.size() > 2 ? 3 : tripImagesList.size();
+                tripImagesByUsers.get(userFollowing).addAll(tripImagesList.subList(0,index));
             }
         }
-
         model.addAttribute("users",tripImagesByUsers);
 
         return "wall";
