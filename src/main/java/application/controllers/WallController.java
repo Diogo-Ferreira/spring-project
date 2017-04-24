@@ -41,7 +41,7 @@ public class WallController {
      * For each followed users, shows last 2-3 trips
      * @return
      */
-    @RequestMapping("/wall")
+    @RequestMapping("/")
     public String wall(Authentication authentication, Model model){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         User user = userService.findByUsername(userDetails.getUsername());

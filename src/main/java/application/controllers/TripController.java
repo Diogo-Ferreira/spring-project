@@ -95,22 +95,38 @@ public class TripController {
 
     /*Delete trip*/
     @RequestMapping(value = "/trip/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable Integer id){
+    public String delete(@PathVariable Integer id, Authentication authentication){
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User authenticatedUser = userService.findByUsername(userDetails.getUsername());
+
         Trip trip = tripService.getTripById(id);
-        trip.getImages().clear();
-        tripService.saveTrip(trip);
-        User user = trip.getTraveler();
-        user.getTrips().remove(trip);
-        userService.save(user);
+
+        if(trip.getTraveler().equals(authenticatedUser)){
+            trip.getImages().clear();
+            tripService.saveTrip(trip);
+            User user = trip.getTraveler();
+            user.getTrips().remove(trip);
+            userService.save(user);
+        }
+
         return "redirect:/profile/show/me";
     }
 
-
     /*Edit a trip*/
     @RequestMapping("/trip/edit/{id}")
-    public String edit(@PathVariable Integer id, Model model){
-        model.addAttribute("trip", tripService.getTripById(id));
-        return "tripform";
+    public String edit(@PathVariable Integer id, Model model, Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User authenticatedUser = userService.findByUsername(userDetails.getUsername());
+        Trip trip = tripService.getTripById(id);
+
+        if(trip.getTraveler().equals(authenticatedUser)){
+            model.addAttribute("trip", trip);
+            return "tripform";
+        }else{
+            return "redirect:/profile/show/me";
+        }
+
     }
 
 }

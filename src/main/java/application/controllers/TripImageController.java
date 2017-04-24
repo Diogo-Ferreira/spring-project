@@ -2,6 +2,7 @@ package application.controllers;
 
 import application.entities.Trip;
 import application.entities.TripImage;
+import application.entities.User;
 import application.services.TripImageService;
 import application.services.TripService;
 import application.services.UserService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,18 +50,23 @@ public class TripImageController {
 
     /*Delete trip image*/
     @RequestMapping(value = "/trip/image/delete/{id}", method = RequestMethod.POST)
-    public String deleteImage(@PathVariable Integer id){
-        TripImage tripImage = tripImageService.getTripImageById(id);
+    public String deleteImage(@PathVariable Integer id, Authentication authentication){
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        User authenticatedUser = userService.findByUsername(userDetails.getUsername());
 
-        try {
-            deleteLocal(tripImage.getUrl());
-        } catch (IOException e) {
-            //e.printStackTrace();
+        TripImage tripImage = tripImageService.getTripImageById(id);
+        Trip trip = tripImage.getTrip();
+
+        if(trip.getTraveler().equals(authenticatedUser)){
+            try {
+                deleteLocal(tripImage.getUrl());
+            } catch (IOException e) {
+                // nothing
+            }
+            trip.getImages().remove(tripImage);
+            tripService.saveTrip(trip);
         }
 
-        Trip trip = tripImage.getTrip();
-        trip.getImages().remove(tripImage);
-        tripService.saveTrip(trip);
         return "redirect:/trip/"+trip.getId();
     }
 
@@ -72,7 +80,7 @@ public class TripImageController {
     }
 
     @PostMapping(value="trip/{trip_id}/image")
-    public String handelFileUpload(@PathVariable Integer trip_id, TripImage image, @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes)
+    public String handelFileUpload(@PathVariable Integer trip_id, TripImage image, @RequestParam("file") MultipartFile file, @RequestParam("title") String title, @RequestParam("body") String body , RedirectAttributes redirectAttributes)
     {
         Trip trip = tripService.getTripById(trip_id);
         trip.getImages().add(image);
@@ -81,6 +89,8 @@ public class TripImageController {
         try {
             String url = "images/"+image.getId();
             image.setUrl(url);
+            image.setTitle(title);
+            image.setBody(body);
             tripImageService.saveTripImage(image);
             saveLocal(url,file);
 
