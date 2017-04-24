@@ -38,11 +38,11 @@
 
     <br />
 
-    <a th:href="@{/trip/edit/{id}(id=${trip.id})}" class="btn btn-info">Alter this trip</a>
+    <a th:href="@{/trip/edit/{id}(id=${trip.id})}" th:if="${isTraveler}" class="btn btn-info">Alter this trip</a>
 
     <br />
 
-    <form method="POST" th:action="@{/trip/delete/{id}(id=${trip.id})}">
+    <form method="POST" th:action="@{/trip/delete/{id}(id=${trip.id})}" th:if="${isTraveler}">
         <input type="submit" value="Delete this trip" class="btn btn-danger" />
     </form>
 </div>
