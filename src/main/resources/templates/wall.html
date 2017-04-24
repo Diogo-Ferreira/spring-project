@@ -9,7 +9,7 @@
 <div th:fragment="content">
 
     <br />
-    <div th:each="user : ${users}" th:if="${not #lists.isEmpty(user.value)}">
+    <div th:each="user : ${users}">
         <h1><a th:href="@{/profile/show/{id}(id=${user.key.id})}" th:text="${user.key.username}" ></a> </h1>
 
         <br />
@@ -28,6 +28,10 @@
         </div>
 
         <br />
+    </div>
+
+    <div th:if="${users.isEmpty()}">
+        You d'ont have any subscribed users !
     </div>
 </div>
 
