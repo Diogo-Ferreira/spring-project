@@ -12,6 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Set;
 
 @Controller
 public class UserController {
@@ -57,5 +60,15 @@ public class UserController {
             model.addAttribute("message", "You have been logged out successfully.");
 
         return "login";
+    }
+
+
+    @RequestMapping("/users")
+    public String searchUsers(Model model, @RequestParam(required = false, defaultValue = "") String query){
+
+        Iterable<User> users = userService.whereUsername("%"+query+"%");
+        model.addAttribute("users",users);
+        model.addAttribute("query",query);
+        return "usersserach";
     }
 }

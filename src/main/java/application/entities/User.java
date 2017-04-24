@@ -6,6 +6,9 @@ import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@NamedQuery(
+        name = "User.whereUsername",
+        query = "select user from User user where user.username LIKE ?")
 public class User {
 
     private Long id;
