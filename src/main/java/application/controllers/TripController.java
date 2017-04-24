@@ -14,7 +14,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import application.services.TripService;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.FileWriter;
 import java.util.*;
 
 /**
@@ -23,7 +26,7 @@ import java.util.*;
 @Controller
 public class TripController {
 
-
+    @Autowired
     private TripService tripService;
 
     @Autowired
@@ -54,6 +57,7 @@ public class TripController {
         User authenticatedUser = userService.findByUsername(userDetails.getUsername());
         Trip trip = tripService.getTripById(id);
         model.addAttribute("trip", trip);
+
         model.addAttribute("isTraveler",trip.getTraveler().equals(authenticatedUser));
         return "tripshow";
     }
@@ -101,17 +105,6 @@ public class TripController {
         return "redirect:/profile/show/me";
     }
 
-    /*Delete trip image*/
-    @RequestMapping(value = "/trip/image/delete/{id}", method = RequestMethod.POST)
-    public String deleteImage(@PathVariable Integer id){
-        TripImage tripImage = tripImageService.getTripImageById(id);
-        Trip trip = tripImage.getTrip();
-        trip.getImages().remove(tripImage);
-        tripService.saveTrip(trip);
-        return "redirect:/trip/"+trip.getId();
-    }
-
-
 
     /*Edit a trip*/
     @RequestMapping("/trip/edit/{id}")
@@ -120,21 +113,4 @@ public class TripController {
         return "tripform";
     }
 
-    /*ADD Image*/
-    @RequestMapping(value="trip/{trip_id}/image")
-    public  String addImage(@PathVariable Integer trip_id,TripImage image){
-
-        Trip trip = tripService.getTripById(trip_id);
-        image.setUrl("www.smashingmagazine.com/wp-content/uploads/2015/06/10-dithering-opt.jpg");
-        trip.getImages().add(image);
-
-        //tripImageService.saveTripImage(image);
-        return  "redirect:/trip/"+trip.getId();
-    }
-
-    @RequestMapping(value="/trip/{trip_id}/new/image")
-    public String newTripImage(@PathVariable Integer trip_id, Model model){
-        model.addAttribute("tripImage", new TripImage());
-        return "addimageform";
-    }
 }

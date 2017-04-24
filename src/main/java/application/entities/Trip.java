@@ -40,6 +40,7 @@ public class Trip {
         return (TripImage) images.toArray()[0];
     }
 
+    // EAGER -> LAZY ??? pour pas tout charger ?
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<TripImage> getImages() {
         return images;
