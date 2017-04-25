@@ -84,6 +84,7 @@ public class TripImageController {
     {
         Trip trip = tripService.getTripById(trip_id);
         trip.getImages().add(image);
+        image.setTrip(trip);
         tripImageService.saveTripImage(image);
 
         try {
