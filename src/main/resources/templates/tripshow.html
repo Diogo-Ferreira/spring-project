@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <br />
+    <a th:href="@{/trip/{id}/new/image(id=${trip.id})}" th:if="${isTraveler}" class="btn btn-info">Add a picture</a>
 
     <div class="card-columns">
         <div class="card card-inverse" th:each="image : ${trip.images}" >
@@ -34,7 +34,6 @@
             </div>
         </div>
     </div>
-
 
     <br />
 
