@@ -4,27 +4,42 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8081/" />
-<title>Authentification</title>
+<title>User_Logic</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Authentification</td></tr>
+<tr><td rowspan="1" colspan="3">User_Logic</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/login</td>
+	<td>/profile/show/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New trip</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=username</td>
-	<td>User2</td>
+	<td>id=name</td>
+	<td>UL1</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>fkdsokgh</td>
+	<td>id=location</td>
+	<td>UL1_Location</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startDate</td>
+	<td>2017-04-27</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=endDate</td>
+	<td>2017-04-28</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -32,33 +47,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>TestUser</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>tata</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn.btn-primary</td>
+	<td>link=My Profile</td>
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>TestUser</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>Hello714</td>
+	<td>clickAndWait</td>
+	<td>link=See this trip</td>
+	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn.btn-primary</td>
+	<td>css=input.btn.btn-danger</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Users</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'See this user')])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//a[contains(text(),'See this trip')])[5]</td>
 	<td></td>
 </tr>
 

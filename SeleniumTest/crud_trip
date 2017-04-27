@@ -4,27 +4,42 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8081/" />
-<title>Authentification</title>
+<title>crud_trip</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Authentification</td></tr>
+<tr><td rowspan="1" colspan="3">crud_trip</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/login</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=New trip</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=username</td>
-	<td>User2</td>
+	<td>id=name</td>
+	<td>My Super new Trip !</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>fkdsokgh</td>
+	<td>id=location</td>
+	<td>New York</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=startDate</td>
+	<td>2017-04-30</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=endDate</td>
+	<td>2017-05-07</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -32,14 +47,19 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>TestUser</td>
+	<td>clickAndWait</td>
+	<td>link=Alter this trip</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>tata</td>
+	<td>id=name</td>
+	<td>My Super new Trip Altered !!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=location</td>
+	<td>Tokyo</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -47,18 +67,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>TestUser</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>Hello714</td>
-</tr>
-<tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn.btn-primary</td>
+	<td>css=input.btn.btn-danger</td>
 	<td></td>
 </tr>
 

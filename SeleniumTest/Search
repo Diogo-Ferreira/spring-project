@@ -4,61 +4,41 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="http://localhost:8081/" />
-<title>Authentification</title>
+<title>Search</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Authentification</td></tr>
+<tr><td rowspan="1" colspan="3">Search</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>/login</td>
+	<td>/profile/show/9</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Users</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=username</td>
-	<td>User2</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>fkdsokgh</td>
+	<td>name=query</td>
+	<td>Sylvain</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn.btn-primary</td>
+	<td>css=button.btn.btn-default</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>name=username</td>
-	<td>TestUser</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>tata</td>
+	<td>name=query</td>
+	<td>John doe</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=input.btn.btn-primary</td>
-	<td></td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>name=username</td>
-	<td>TestUser</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>id=inputPassword</td>
-	<td>Hello714</td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>css=input.btn.btn-primary</td>
+	<td>css=button.btn.btn-default</td>
 	<td></td>
 </tr>
 
